@@ -134,8 +134,6 @@ namespace RpsGameForm
 
         // 처리 값
         int ComSelect;    // 컴퓨터의 선택값
-        public Status ExchangedComSelect;
-        public Status ExchangedUserSelect;
 
         public int SetComputerChoice()
         {
@@ -149,77 +147,25 @@ namespace RpsGameForm
         public Expression Play(int UserChoice, int ComputerChoice)
         {
             Expression Expression = new Expression();
-            Expression.GameResult = Results.None;                   // 게임 결과
+            Expression.GameResult = Results.None;    // 게임 결과
 
-            ExchangedUserSelect = Status.None;     // 사용자 선택의 변환값
-            ExchangedComSelect = Status.None;  // 컴퓨터의 선택값의 변환값
-
-            // 사용자 선택의 변환값을 구한다.
-            switch (UserChoice)
+            if(UserSelect == ComSelect)
             {
-                case 0:
-                    ExchangedUserSelect = Status.Gawi;
-                    break;
-                case 1:
-                    ExchangedUserSelect = Status.Bawi;
-                    break;
-                case 2:
-                    ExchangedUserSelect = Status.Bo;
-                    break;
-                default:
-                    break;
+                Expression.GameResult = Results.Draw;
             }
-
-            // 컴퓨터 선택의 변환값을 구한다.
-            switch (ComputerChoice)
+            else
             {
-                case 0:
-                    ExchangedComSelect = Status.Gawi;
-                    break;
-                case 1:
-                    ExchangedComSelect = Status.Bawi;
-                    break;
-                case 2:
-                    ExchangedComSelect = Status.Bo;
-                    break;
-                default:
-                    break;
+                switch(UserSelect)
+                {
+                    case 0: Expression.GameResult = (ComSelect == 2) ? Results.Win : Results.Lose; break;
+                    case 1: Expression.GameResult = (ComSelect == 0) ? Results.Win : Results.Lose; break;
+                    case 2: Expression.GameResult = (ComSelect == 1) ? Results.Win : Results.Lose; break;
+                }
             }
-
-            // 가위바위보 게임을 한다.
-            Expression.GameResult = CompareTwo(ExchangedUserSelect, ExchangedComSelect);
 
             return Expression;
         }
 
-        Results CompareTwo(Status User, Status Computer)
-        {
-            Results result = Results.None;
-
-            if (User < Computer)
-            {
-                result = Results.Lose;
-            }
-            else if (User > Computer)
-            {
-                result = Results.Win;
-            }
-            else
-            {
-                result = Results.Draw;
-            }
-
-            if (User == Status.Bo && Computer == Status.Gawi)
-            {
-                result = Results.Lose;
-            }
-            if (User == Status.Gawi && Computer == Status.Bo)
-            {
-                result = Results.Win;
-            }
-
-            return result;
-        }
 
         public delegate void GameEventHandler(Expression Expression);
         public event GameEventHandler GameResultEvent;
