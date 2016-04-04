@@ -1,0 +1,9 @@
+E:\Projects\RpsGameForm\RpsGameForm\bin\Debug\RpsGameForm.exe.config
+E:\Projects\RpsGameForm\RpsGameForm\bin\Debug\RpsGameForm.exe
+E:\Projects\RpsGameForm\RpsGameForm\bin\Debug\RpsGameForm.pdb
+E:\Projects\RpsGameForm\RpsGameForm\obj\Debug\RpsGameForm.csprojResolveAssemblyReference.cache
+E:\Projects\RpsGameForm\RpsGameForm\obj\Debug\RpsGameForm.EventForm.resources
+E:\Projects\RpsGameForm\RpsGameForm\obj\Debug\RpsGameForm.Properties.Resources.resources
+E:\Projects\RpsGameForm\RpsGameForm\obj\Debug\RpsGameForm.csproj.GenerateResource.Cache
+E:\Projects\RpsGameForm\RpsGameForm\obj\Debug\RpsGameForm.exe
+E:\Projects\RpsGameForm\RpsGameForm\obj\Debug\RpsGameForm.pdb
