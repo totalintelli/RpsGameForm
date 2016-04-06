@@ -97,15 +97,15 @@ namespace RpsGameForm
         public void ShowResult(Expression Expression)
         {
             // 컴퓨터 선택의 변환값을 화면에 표시한다.
-            switch (RpsGame.ExchangedComSelect)
+            switch (RpsGame.ComSelect)
             {
-                case Status.Gawi:
+                case 0:
                     rightPicBox.Load(GawiImgPath);
                     break;
-                case Status.Bawi:
+                case 1:
                     rightPicBox.Load(BawiImgPath);
                     break;
-                case Status.Bo:
+                case 2:
                     rightPicBox.Load(BoImgPath);
                     break;
                 default:
@@ -133,7 +133,7 @@ namespace RpsGameForm
         public int UserSelect; // 사용자의 선택값
 
         // 처리 값
-        int ComSelect;    // 컴퓨터의 선택값
+        public int ComSelect;    // 컴퓨터의 선택값
 
         public int SetComputerChoice()
         {
