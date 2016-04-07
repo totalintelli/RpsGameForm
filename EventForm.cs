@@ -144,7 +144,7 @@ namespace RpsGameForm
             return ComSelect;
         }
 
-        public Expression Play(int UserChoice, int ComputerChoice)
+        public Expression Play(int UserSelect, int ComSelect)
         {
             Expression Expression = new Expression();
             Expression.GameResult = Results.None;    // 게임 결과
