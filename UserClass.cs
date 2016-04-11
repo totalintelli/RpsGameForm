@@ -13,11 +13,12 @@ namespace RpsGameForm
         public int UserSelect; 
 
         // 처리 값(컴퓨터가 선택한 값)
-        public int ComSelect;   
+        public int ComSelect;
 
+        // 컴퓨터가 선택한 값을 구한다.
         public int SetComSelect()
         {
-            // 컴퓨터가 선택한 값을 구한다.
+            
             Random Random = new Random();
             return Random.Next(0, 3);
             
