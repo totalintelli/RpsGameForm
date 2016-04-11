@@ -58,8 +58,15 @@ namespace RpsGameForm
         // 게임 결과를 화면에 출력한다.
         private void ShowResult(Results GameResult)
         {
+            // 화면에 이미지를 불러온다.
             LoadImage();
-                        
+
+            // 화면에 게임 결과 글자를 불러온다.
+            LoadText(GameResult);
+        }
+
+        private void LoadText(Results GameResult)
+        {
             string ResultText = "";
             switch (GameResult)
             {
