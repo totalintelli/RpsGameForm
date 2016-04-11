@@ -32,6 +32,7 @@ namespace RpsGameForm
 
      
 
+        // 사용자의 선택 값을 입력받는다.
         private void btn_clicked(object sender, EventArgs e)
         {
             Button Btn = (Button)sender;
@@ -57,6 +58,7 @@ namespace RpsGameForm
 
 
 
+        // 게임 결과를 화면에 출력한다.
         private void ShowResult(Results GameResult)
         {
             LoadImage();
