@@ -22,6 +22,28 @@ namespace RpsGameForm
         string BawiImgPath = CommonPath + "Rock.png";     // 바위 이미지 경로
         string BoImgPath = CommonPath + "Paper.png";      // 보 이미지 경로
 
+        struct RpsImg
+        {
+            int m_Number;
+            string m_ImgPath;
+
+            public RpsImg(int Number, string ImgPath)
+            {
+                m_Number = Number;
+                m_ImgPath = ImgPath;
+            }
+
+            public int GetNumber()
+            {
+                return m_Number;
+            }
+
+            public string GetImgPath()
+            {
+                return m_ImgPath;
+            }
+        }
+
         public EventForm()
         {
             InitializeComponent();
@@ -113,27 +135,18 @@ namespace RpsGameForm
         // 이미지 경로를 구한다.
         public string GetImgPath(int number)
         {
-            string ImgPath = "";
+            string ImgPath = ""; // 출력할 가위바위보 이미지의 경로
+            List<RpsImg> RpsImgList = new List<RpsImg>(); // 사용자나 컴퓨터가 선택한 수와 가위바위보 이미지의 리스트
+            RpsImgList.Add(new RpsImg(0, GawiImgPath));
+            RpsImgList.Add(new RpsImg(1, BawiImgPath));
+            RpsImgList.Add(new RpsImg(2, BoImgPath));
 
-            switch(number)
+            for(int i = 0; i < RpsImgList.Count; i++)
             {
-                case 0:
-                    {
-                        ImgPath = GawiImgPath;
-                        break;
-                    }
-                case 1:
-                    {
-                        ImgPath = BawiImgPath;
-                        break;
-                    }
-                case 2:
-                    {
-                        ImgPath = BoImgPath;
-                        break;
-                    }
-                default:
-                    break;
+                if(RpsImgList[i].GetNumber() == number)
+                {
+                    ImgPath = RpsImgList[i].GetImgPath();
+                }
             }
 
             return ImgPath;
