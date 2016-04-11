@@ -103,23 +103,43 @@ namespace RpsGameForm
         // 가위바위보 이미지를 화면에 출력한다.
         public void LoadImage()
         {
-            string ImgPath = ""; //가위바위보 이미지의 경로
-
-            if(RpsGame.UserSelect == 0 || RpsGame.ComSelect == 0)
-            {
-                ImgPath = GawiImgPath;
-            }
-            else if(RpsGame.UserSelect == 1 || RpsGame.ComSelect == 1)
-            {
-                ImgPath = BawiImgPath;
-            }
-            else
-            {
-                ImgPath = BoImgPath;
-            }
+            string PbLeftImgPath = GetImgPath(RpsGame.UserSelect); //사용자가 선택한 값과 같은가위바위보 이미지의 경로
+            string PbRightImgPath = GetImgPath(RpsGame.ComSelect); // 컴퓨터의 선택 값과 같은 가위바위보 이미지의 경로
             
-            PbLeft.Load(ImgPath);
-            PbRight.Load(ImgPath);
+            PbLeft.Load(PbLeftImgPath);
+            PbRight.Load(PbRightImgPath);
+        }
+
+        // 이미지 경로를 구한다.
+        public string GetImgPath(int number)
+        {
+            string ImgPath = "";
+
+            switch(number)
+            {
+                case 0:
+                    {
+                        ImgPath = GawiImgPath;
+                        break;
+                    }
+                case 1:
+                    {
+                        ImgPath = BawiImgPath;
+                        break;
+                    }
+                case 2:
+                    {
+                        ImgPath = BoImgPath;
+                        break;
+                    }
+                default:
+                    break;
+            }
+
+            return ImgPath;
         }
     }
+
+
+
 }
