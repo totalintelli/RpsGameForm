@@ -58,7 +58,7 @@ namespace RpsGameForm
         }
 
         // 가위바위보 게임 이벤트를 실행한다.
-        public void Run(RpsGame RpsGame)
+        public void Run()
         {
             ComSelect = SetComSelect();
 

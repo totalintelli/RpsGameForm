@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace RpsGameForm
 {
@@ -16,7 +17,7 @@ namespace RpsGameForm
     {
         RpsGame RpsGame = new RpsGame();
 
-        static string CommonPath = "E:\\Projects\\RpsGameForm\\RpsGameForm\\"; // 공통 경로
+        static string CommonPath = Application.StartupPath + @"\..\..\"; // 현재 프로젝트 디렉토리 경로
         string GawiImgPath = CommonPath + "Scissors.png"; // 가위 이미지 경로
         string BawiImgPath = CommonPath + "Rock.png";     // 바위 이미지 경로
         string BoImgPath = CommonPath + "Paper.png";      // 보 이미지 경로
@@ -50,7 +51,7 @@ namespace RpsGameForm
                 RpsGame.UserSelect = 2;
             }
 
-            RpsGame.Run(RpsGame);
+            RpsGame.Run();
         }
 
 
@@ -102,52 +103,23 @@ namespace RpsGameForm
         // 가위바위보 이미지를 화면에 출력한다.
         public void LoadImage()
         {
-            string PbLeftImgPath = ""; //사용자의 선택 값과 같은 가위바위보 이미지의 경로
-            switch (RpsGame.UserSelect)
-            {
-                case 0:
-                    {
-                        PbLeftImgPath = GawiImgPath;
-                        break;
-                    }
-                case 1:
-                    {
-                        PbLeftImgPath = BawiImgPath;
-                        break;
-                    }
-                case 2:
-                    {
-                        PbLeftImgPath = BoImgPath;
-                        break;
-                    }
-                default:
-                    break;
-            }
-            PbLeft.Load(PbLeftImgPath);
+            string ImgPath = ""; //가위바위보 이미지의 경로
 
-            string PbRightImgPath = ""; // 컴퓨터의 선택 값과 같은 가위바위보 이미지의 경로
-            // 컴퓨터 선택의 변환값을 화면에 표시한다.
-            switch (RpsGame.ComSelect)
+            if(RpsGame.UserSelect == 0 || RpsGame.ComSelect == 0)
             {
-                case 0:
-                    {
-                        PbRightImgPath = GawiImgPath;
-                        break;
-                    }
-                case 1:
-                    {
-                        PbRightImgPath = BawiImgPath;
-                        break;
-                    }
-                case 2:
-                    {
-                        PbRightImgPath = BoImgPath;
-                        break;
-                    }
-                default:
-                    break;
+                ImgPath = GawiImgPath;
             }
-            PbRight.Load(PbRightImgPath);
+            else if(RpsGame.UserSelect == 1 || RpsGame.ComSelect == 1)
+            {
+                ImgPath = BawiImgPath;
+            }
+            else
+            {
+                ImgPath = BoImgPath;
+            }
+            
+            PbLeft.Load(ImgPath);
+            PbRight.Load(ImgPath);
         }
     }
 }
