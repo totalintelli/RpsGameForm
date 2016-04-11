@@ -40,17 +40,14 @@ namespace RpsGameForm
             if(Btn == BtnGawi)
             {
                 RpsGame.UserSelect = 0;
-                
             }
             else if(Btn == BtnBawi)
             {
                 RpsGame.UserSelect = 1;
-                
             }
             else if(Btn == BtnBo)
             {
                 RpsGame.UserSelect = 2;
-                
             }
 
             RpsGame.Run(RpsGame);
@@ -98,7 +95,7 @@ namespace RpsGameForm
         // 가위바위보 이미지를 화면에 출력한다.
         public void LoadImage()
         {
-            string PbLeftImgPath = ""; //사용자의 선택 값에 맞는 가위바위보 이미지의 경로
+            string PbLeftImgPath = ""; //사용자의 선택 값과 같은 가위바위보 이미지의 경로
 
             switch (RpsGame.UserSelect)
             {
@@ -123,7 +120,7 @@ namespace RpsGameForm
 
             PbLeft.Load(PbLeftImgPath);
 
-            string PbRightImgPath = ""; // 컴퓨터의 선택 값에 맞는 가위바위보 이미지의 경로
+            string PbRightImgPath = ""; // 컴퓨터의 선택 값과 같은 가위바위보 이미지의 경로
 
             // 컴퓨터 선택의 변환값을 화면에 표시한다.
             switch (RpsGame.ComSelect)
