@@ -96,7 +96,6 @@ namespace RpsGameForm
         public void LoadImage()
         {
             string PbLeftImgPath = ""; //사용자의 선택 값과 같은 가위바위보 이미지의 경로
-
             switch (RpsGame.UserSelect)
             {
                 case 0:
@@ -117,11 +116,9 @@ namespace RpsGameForm
                 default:
                     break;
             }
-
             PbLeft.Load(PbLeftImgPath);
 
             string PbRightImgPath = ""; // 컴퓨터의 선택 값과 같은 가위바위보 이미지의 경로
-
             // 컴퓨터 선택의 변환값을 화면에 표시한다.
             switch (RpsGame.ComSelect)
             {
@@ -143,11 +140,7 @@ namespace RpsGameForm
                 default:
                     break;
             }
-
             PbRight.Load(PbRightImgPath);
         }
     }
-
-   
-
 }
