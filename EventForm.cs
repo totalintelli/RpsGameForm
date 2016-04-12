@@ -11,8 +11,6 @@ using System.IO;
 
 namespace RpsGameForm
 {
-   
-
     public partial class EventForm : Form
     {
         RpsGame RpsGame = new RpsGame();
@@ -42,8 +40,6 @@ namespace RpsGameForm
             {
                 return StrImgPath;
             }
-
-            
         }
 
         struct RpsTxt

@@ -53,6 +53,4 @@ namespace RpsGameForm
         /// </summary>
         None = -1
     }
-
-
 }

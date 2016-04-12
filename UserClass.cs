@@ -18,12 +18,9 @@ namespace RpsGameForm
         // 컴퓨터가 선택한 값을 구한다.
         public int SetComSelect()
         {
-            
             Random Random = new Random();
             return Random.Next(0, 3);
-            
         }
-
 
         // 가위바위보 게임의 결과를 구한다.
         public Results Play(int UserSelect, int ComSelect)
@@ -46,7 +43,6 @@ namespace RpsGameForm
 
             return GameResult;
         }
-
 
         // 가위바위보 게임 이벤트
         public delegate void GameEventHandler(Results GameResult);
