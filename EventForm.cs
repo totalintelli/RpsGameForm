@@ -24,23 +24,59 @@ namespace RpsGameForm
 
         struct RpsImg
         {
-            int m_Number;
-            string m_ImgPath;
+            int IntNumber;
+            string StrImgPath; 
 
             public RpsImg(int Number, string ImgPath)
             {
-                m_Number = Number;
-                m_ImgPath = ImgPath;
+                IntNumber = Number;
+                StrImgPath = ImgPath;
             }
 
-            public int GetNumber()
+            public int GetIntNumber()
             {
-                return m_Number;
+                return IntNumber;
             }
 
-            public string GetImgPath()
+            public string GetStrImgPath()
             {
-                return m_ImgPath;
+                return StrImgPath;
+            }
+
+            
+        }
+
+        struct RpsTxt
+        {
+            Results m_GameResult;
+            string m_ResultText;
+
+            public RpsTxt(Results GameResult, string ResultText)
+            {
+                m_GameResult = GameResult;
+                m_ResultText = ResultText;
+            }
+
+            public Results GetGameResult()
+            {
+                return m_GameResult;
+            }
+
+            public string GetResultText()
+            {
+                return m_ResultText;
+            }
+
+            public bool Equals(Results GameResult)
+            {
+                bool Res = false;
+
+                if(m_GameResult == GameResult)
+                {
+                    Res = true;
+                }
+
+                return Res;
             }
         }
 
@@ -52,8 +88,6 @@ namespace RpsGameForm
             RpsGame.GameResultEvent += ShowResult;
            
         }
-
-     
 
         // 사용자의 선택 값을 입력받는다.
         private void btn_clicked(object sender, EventArgs e)
@@ -76,8 +110,6 @@ namespace RpsGameForm
             RpsGame.Run();
         }
 
-
-
         // 게임 결과를 화면에 출력한다.
         private void ShowResult(Results GameResult)
         {
@@ -88,39 +120,34 @@ namespace RpsGameForm
             LoadText(GameResult);
         }
 
+        // 가위바위보 게임 결과를 화면에 출력한다.
         private void LoadText(Results GameResult)
         {
-            string ResultText = "";
-            switch (GameResult)
-            {
-                case Results.Win:
-                    {
-                        ResultText = "당신은 이겼습니다.";
-                        break;
-                    }
-                case Results.Draw:
-                    {
-                        ResultText = "당신은 비겼습니다.";
-                        break;
-                    }
-                case Results.Lose:
-                    {
-                        ResultText = "당신은 졌습니다.";
-                        break;
-                    }
-                case Results.None:
-                    {
-                        ResultText = "컴퓨터가 고민하고 있습니다.";
-                        break;
-                    }
-                default:
-                    break;
-            }
-
-            lb_result.Text = ResultText;
+            // 화면에 텍스트를 출력한다.
+            lb_result.Text = GetResultText(GameResult);
         }
 
+        // 가위바위보 게임 결과 글자를 구한다.
+        public string GetResultText(Results GameResult)
+        {
+            string ResultText = ""; // 게임 결과 글자의 경로
 
+            List<RpsTxt> RpsTxtList = new List<RpsTxt>(); // 게임 결과와 게임 결과 글자의 목록
+            RpsTxtList.Add(new RpsTxt(Results.Win, "당신은 이겼습니다."));
+            RpsTxtList.Add(new RpsTxt(Results.Draw, "당신은 비겼습니다."));
+            RpsTxtList.Add(new RpsTxt(Results.Lose, "당신은 졌습니다."));
+
+            // 게임 결과 글자를 고른다.
+            for (int i = 0; i < RpsTxtList.Count; i++)
+            {
+                if (RpsTxtList[i].Equals(GameResult))
+                {
+                    ResultText = RpsTxtList[i].GetResultText();
+                }
+            }
+
+            return ResultText;
+        }
 
         // 가위바위보 이미지를 화면에 출력한다.
         public void LoadImage()
@@ -128,6 +155,7 @@ namespace RpsGameForm
             string PbLeftImgPath = GetImgPath(RpsGame.UserSelect); //사용자가 선택한 값과 같은가위바위보 이미지의 경로
             string PbRightImgPath = GetImgPath(RpsGame.ComSelect); // 컴퓨터의 선택 값과 같은 가위바위보 이미지의 경로
             
+            // 화면에 이미지를 출력한다.
             PbLeft.Load(PbLeftImgPath);
             PbRight.Load(PbRightImgPath);
         }
@@ -136,16 +164,18 @@ namespace RpsGameForm
         public string GetImgPath(int number)
         {
             string ImgPath = ""; // 출력할 가위바위보 이미지의 경로
+
             List<RpsImg> RpsImgList = new List<RpsImg>(); // 사용자나 컴퓨터가 선택한 수와 가위바위보 이미지의 리스트
             RpsImgList.Add(new RpsImg(0, GawiImgPath));
             RpsImgList.Add(new RpsImg(1, BawiImgPath));
             RpsImgList.Add(new RpsImg(2, BoImgPath));
 
+            // 수에 알맞는 이미지 경로를 찾는다.
             for(int i = 0; i < RpsImgList.Count; i++)
             {
-                if(RpsImgList[i].GetNumber() == number)
+                if(RpsImgList[i].GetIntNumber() == number)
                 {
-                    ImgPath = RpsImgList[i].GetImgPath();
+                    ImgPath = RpsImgList[i].GetStrImgPath();
                 }
             }
 
