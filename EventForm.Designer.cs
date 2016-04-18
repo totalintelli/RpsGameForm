@@ -52,7 +52,7 @@
             this.groupBox1.Controls.Add(this.BtnBo);
             this.groupBox1.Controls.Add(this.BtnBawi);
             this.groupBox1.Controls.Add(this.BtnGawi);
-            this.groupBox1.Location = new System.Drawing.Point(13, 13);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(259, 223);
             this.groupBox1.TabIndex = 0;

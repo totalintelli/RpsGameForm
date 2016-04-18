@@ -10,17 +10,10 @@ namespace RpsGameForm
     public class RpsGame
     {
         // 입력 값(사용자가 선택한 값)
-        public int UserSelect; 
+        public int UserSelect;
 
         // 처리 값(컴퓨터가 선택한 값)
         public int ComSelect;
-
-        // 컴퓨터가 선택한 값을 구한다.
-        public int SetComSelect()
-        {
-            Random Random = new Random();
-            return Random.Next(0, 3);
-        }
 
         // 가위바위보 게임의 결과를 구한다.
         public Results Play(int UserSelect, int ComSelect)
@@ -45,22 +38,45 @@ namespace RpsGameForm
         }
 
         // 가위바위보 게임 이벤트
-        public delegate void GameEventHandler(Results GameResult);
+        public delegate void GameEventHandler(GameEventArgs GameEventArgs);
         public event GameEventHandler GameResultEvent;
-        private void FireGameResultEvent(Results GameResult)
+        private void FireGameResultEvent(GameEventArgs GameEventArgs)
         {
             if (GameResultEvent != null)
-                GameResultEvent(GameResult);
+                GameResultEvent(GameEventArgs);
         }
 
         // 가위바위보 게임 이벤트를 실행한다.
-        public void Run()
+        public void Run(GameEventArgs GameEventArgs)
         {
-            ComSelect = SetComSelect();
+            Results GameResult = Play(GameEventArgs.UserSelect, GameEventArgs.ComSelect);
+            GameEventArgs.SetGameResult(GameResult);
 
-            Results GameResult = Play(UserSelect, ComSelect);
+            FireGameResultEvent(GameEventArgs);
+        }
+    }
 
-            FireGameResultEvent(GameResult);
+    public class GameEventArgs
+    {
+        public int UserSelect { get; private set; }
+        public int ComSelect { get; private set; }
+        public Results GameResult { get; private set; }
+
+        public GameEventArgs(int m_UserSelect, int m_ComSelect)
+        {
+           UserSelect = m_UserSelect;
+            ComSelect = m_ComSelect;
+        }
+        public GameEventArgs(int m_UserSelect, int m_ComSelect, Results m_GameResult)
+        {
+            UserSelect = m_UserSelect;
+            ComSelect = m_ComSelect;
+            GameResult = m_GameResult;
+        }
+
+        internal void SetGameResult(Results m_GameResult)
+        {
+            GameResult = m_GameResult;
         }
     }
 }

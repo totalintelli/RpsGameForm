@@ -13,8 +13,6 @@ namespace RpsGameForm
 {
     public partial class EventForm : Form
     {
-        RpsGame RpsGame = new RpsGame();
-
         static string CommonPath = Application.StartupPath + @"\..\..\"; // 현재 프로젝트 디렉토리 경로
         string GawiImgPath = CommonPath + "Scissors.png"; // 가위 이미지 경로
         string BawiImgPath = CommonPath + "Rock.png";     // 바위 이미지 경로
@@ -23,7 +21,7 @@ namespace RpsGameForm
         struct RpsImg
         {
             int IntNumber;
-            string StrImgPath; 
+            string StrImgPath;
 
             public RpsImg(int Number, string ImgPath)
             {
@@ -67,7 +65,7 @@ namespace RpsGameForm
             {
                 bool Res = false;
 
-                if(m_GameResult == GameResult)
+                if (m_GameResult == GameResult)
                 {
                     Res = true;
                 }
@@ -81,39 +79,47 @@ namespace RpsGameForm
             InitializeComponent();
             PbLeft.SizeMode = PictureBoxSizeMode.StretchImage;
             PbRight.SizeMode = PictureBoxSizeMode.StretchImage;
-            RpsGame.GameResultEvent += ShowResult;
-           
+            
+
         }
 
         // 사용자의 선택 값을 입력받는다.
         private void btn_clicked(object sender, EventArgs e)
         {
             Button Btn = (Button)sender;
+            GameEventArgs GameEventArgs;  // 게임 이벤트 발생시 필요한 값들(사용자가 선택한 값, 컴퓨터가 선택한 값, 게임 결과)
+            Random Random = new Random(); // 컴퓨터가 자동으로 선택하도록 하기 위한 Random 클래스
+            RpsGame RpsGame = new RpsGame(); // 가위바위보 게임 객체
+            int UserSelect = -1;
+            int ComSelect = Random.Next(0, 3);
 
-            if(Btn == BtnGawi)
+            if (Btn == BtnGawi)
             {
-                RpsGame.UserSelect = 0;
+               UserSelect = 0;
             }
-            else if(Btn == BtnBawi)
+            else if (Btn == BtnBawi)
             {
-                RpsGame.UserSelect = 1;
+                UserSelect = 1;
             }
-            else if(Btn == BtnBo)
+            else if (Btn == BtnBo)
             {
-                RpsGame.UserSelect = 2;
+                UserSelect = 2;
             }
 
-            RpsGame.Run();
+            GameEventArgs = new GameEventArgs(UserSelect, ComSelect);
+
+            RpsGame.GameResultEvent += ShowResult;
+            RpsGame.Run(GameEventArgs);
         }
 
         // 게임 결과를 화면에 출력한다.
-        private void ShowResult(Results GameResult)
+        private void ShowResult(GameEventArgs GameEventArgs)
         {
             // 화면에 이미지를 불러온다.
-            LoadImage();
+            LoadImage(GameEventArgs);
 
             // 화면에 게임 결과 글자를 불러온다.
-            LoadText(GameResult);
+            LoadText(GameEventArgs.GameResult);
         }
 
         // 가위바위보 게임 결과를 화면에 출력한다.
@@ -146,11 +152,11 @@ namespace RpsGameForm
         }
 
         // 가위바위보 이미지를 화면에 출력한다.
-        public void LoadImage()
+        public void LoadImage(GameEventArgs GameEventArgs)
         {
-            string PbLeftImgPath = GetImgPath(RpsGame.UserSelect); //사용자가 선택한 값과 같은가위바위보 이미지의 경로
-            string PbRightImgPath = GetImgPath(RpsGame.ComSelect); // 컴퓨터의 선택 값과 같은 가위바위보 이미지의 경로
-            
+            string PbLeftImgPath = GetImgPath(GameEventArgs.UserSelect); //사용자가 선택한 값과 같은가위바위보 이미지의 경로
+            string PbRightImgPath = GetImgPath(GameEventArgs.ComSelect); // 컴퓨터의 선택 값과 같은 가위바위보 이미지의 경로
+
             // 화면에 이미지를 출력한다.
             PbLeft.Load(PbLeftImgPath);
             PbRight.Load(PbRightImgPath);
@@ -167,9 +173,9 @@ namespace RpsGameForm
             RpsImgList.Add(new RpsImg(2, BoImgPath));
 
             // 수에 알맞는 이미지 경로를 찾는다.
-            for(int i = 0; i < RpsImgList.Count; i++)
+            for (int i = 0; i < RpsImgList.Count; i++)
             {
-                if(RpsImgList[i].GetIntNumber() == number)
+                if (RpsImgList[i].GetIntNumber() == number)
                 {
                     ImgPath = RpsImgList[i].GetStrImgPath();
                 }
