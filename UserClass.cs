@@ -62,19 +62,19 @@ namespace RpsGameForm
         public int ComSelect { get; private set; }
         public Results GameResult { get; private set; }
 
-        public GameEventArgs(int m_UserSelect, int m_ComSelect)
+        private GameEventArgs(int m_UserSelect, int m_ComSelect)
         {
            UserSelect = m_UserSelect;
             ComSelect = m_ComSelect;
         }
-        public GameEventArgs(int m_UserSelect, int m_ComSelect, Results m_GameResult)
+        private GameEventArgs(int m_UserSelect, int m_ComSelect, Results m_GameResult)
         {
             UserSelect = m_UserSelect;
             ComSelect = m_ComSelect;
             GameResult = m_GameResult;
         }
 
-        internal void SetGameResult(Results m_GameResult)
+        public void SetGameResult(Results m_GameResult)
         {
             GameResult = m_GameResult;
         }
