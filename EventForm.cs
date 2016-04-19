@@ -42,30 +42,30 @@ namespace RpsGameForm
 
         struct RpsTxt
         {
-            Results m_GameResult;
-            string m_ResultText;
+            Results GameResult;
+            string ResultText;
 
-            public RpsTxt(Results GameResult, string ResultText)
+            public RpsTxt(Results m_GameResult, string m_ResultText)
             {
-                m_GameResult = GameResult;
-                m_ResultText = ResultText;
+                GameResult = m_GameResult;
+                ResultText = m_ResultText;
             }
 
             public Results GetGameResult()
             {
-                return m_GameResult;
+                return GameResult;
             }
 
             public string GetResultText()
             {
-                return m_ResultText;
+                return ResultText;
             }
 
-            public bool Equals(Results GameResult)
+            public bool Equals(Results m_GameResult)
             {
                 bool Res = false;
 
-                if (m_GameResult == GameResult)
+                if (GameResult == m_GameResult)
                 {
                     Res = true;
                 }
@@ -90,8 +90,8 @@ namespace RpsGameForm
             GameEventArgs GameEventArgs;  // 게임 이벤트 발생시 필요한 값들(사용자가 선택한 값, 컴퓨터가 선택한 값, 게임 결과)
             Random Random = new Random(); // 컴퓨터가 자동으로 선택하도록 하기 위한 Random 클래스
             RpsGame RpsGame = new RpsGame(); // 가위바위보 게임 객체
-            int UserSelect = -1;
-            int ComSelect = Random.Next(0, 3);
+            int UserSelect = -1;               // 사용자가 선택한 값
+            int ComSelect = Random.Next(0, 3); // 컴퓨터가 선택한 값
 
             if (Btn == BtnGawi)
             {
@@ -118,21 +118,21 @@ namespace RpsGameForm
             // 화면에 이미지를 불러온다.
             LoadImage(GameEventArgs);
 
-            // 화면에 게임 결과 글자를 불러온다.
+            // 화면에 게임 결과를 불러온다.
             LoadText(GameEventArgs.GameResult);
         }
 
-        // 가위바위보 게임 결과를 화면에 출력한다.
+        // 가위바위보 게임 결과 글자를 화면에 출력한다.
         private void LoadText(Results GameResult)
         {
-            // 화면에 텍스트를 출력한다.
+            // 화면에 게임 결과 글자를 출력한다.
             lb_result.Text = GetResultText(GameResult);
         }
 
         // 가위바위보 게임 결과 글자를 구한다.
         public string GetResultText(Results GameResult)
         {
-            string ResultText = ""; // 게임 결과 글자의 경로
+            string ResultText = ""; // 가위바위보 게임 결과 글자
 
             List<RpsTxt> RpsTxtList = new List<RpsTxt>(); // 게임 결과와 게임 결과 글자의 목록
             RpsTxtList.Add(new RpsTxt(Results.Win, "당신은 이겼습니다."));
@@ -154,8 +154,8 @@ namespace RpsGameForm
         // 가위바위보 이미지를 화면에 출력한다.
         public void LoadImage(GameEventArgs GameEventArgs)
         {
-            string PbLeftImgPath = GetImgPath(GameEventArgs.UserSelect); //사용자가 선택한 값과 같은가위바위보 이미지의 경로
-            string PbRightImgPath = GetImgPath(GameEventArgs.ComSelect); // 컴퓨터의 선택 값과 같은 가위바위보 이미지의 경로
+            string PbLeftImgPath = GetImgPath(GameEventArgs.UserSelect); // 사용자가 선택한 값과 같은 가위바위보 이미지의 경로
+            string PbRightImgPath = GetImgPath(GameEventArgs.ComSelect); // 컴퓨터가 선택한 값과 같은 가위바위보 이미지의 경로
 
             // 화면에 이미지를 출력한다.
             PbLeft.Load(PbLeftImgPath);
@@ -172,7 +172,7 @@ namespace RpsGameForm
             RpsImgList.Add(new RpsImg(1, BawiImgPath));
             RpsImgList.Add(new RpsImg(2, BoImgPath));
 
-            // 수에 알맞는 이미지 경로를 찾는다.
+            // 사용자나 컴퓨터가 선택한 수에 알맞는 이미지 경로를 찾는다.
             for (int i = 0; i < RpsImgList.Count; i++)
             {
                 if (RpsImgList[i].GetIntNumber() == number)
